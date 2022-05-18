@@ -1,1 +1,13 @@
-<p>home works!</p>
+<div>
+    <mat-nav-list>
+    <mat-list-item *ngFor="let city of cityInformation">
+       <p matLine (click)="getMoreweatherDetails(city.name, city.coord.lat, city.coord.lon)"><Strong> {{ city.name }} </Strong>
+        <span>Temperature - {{city.main.temp}} , Sunrise time - {{ city.sys.sunrise+"000" | date: 'medium'  }} , Sunset time - {{ city.sys.sunset+"000"  | date: 'medium'   }} </span><br/>
+        </p>
+    </mat-list-item>
+</mat-nav-list>
+<div class="note">click on any city for more details!</div>
+</div>
+<hr />
+<app-detail [cityData]="foreCastInformation"></app-detail>
+

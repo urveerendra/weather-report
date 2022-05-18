@@ -1,1 +1,23 @@
-<p>detail works!</p>
+<div *ngIf="cityData">
+    <h3><strong>{{ city }}'s</strong> Weather Details</h3>
+    <!-- <h4>seem's {{ cityData.weather[0].main }}</h4> -->
+    <h3> Below are weather info on coming days</h3>
+    <table>
+        <thead>
+            <td>Date </td>   
+            <td>Temperature </td>
+            <td>ForeCast </td>    
+            <td>min-temperature </td>
+            <td>max-temperature</td>
+        </thead>
+        <tr *ngFor='let dayData of daysInfo'>
+            <td>{{ dayData.dt+"000" | date: 'mediumDate' }} </td>   
+            <td>{{dayData.temp}} </td>
+            <td>{{ dayData.forecast}} </td>    
+            <td>{{dayData.minTemp }} </td>
+            <td>{{dayData.maxTemp }} </td>
+        </tr>
+    </table>    
+</div>
+
+
