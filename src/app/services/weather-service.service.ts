@@ -25,6 +25,9 @@ export class WeatherService {
   setCityData(cityData:any){
     this.cityData = cityData;
   }
+  convertTemp(tempNumber:any){
+    return Number(tempNumber/5 - 32).toFixed(0) + "\xB0C";
+  }
   public getWeatherDataFor5Days(lat?:string,lon?:string, appId?: string){
     if(!appId){
       appId = "f33373c4d7c79ce797961ed501b58d93";

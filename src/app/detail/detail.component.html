@@ -2,22 +2,33 @@
     <h3><strong>{{ city }}'s</strong> Weather Details</h3>
     <!-- <h4>seem's {{ cityData.weather[0].main }}</h4> -->
     <h3> Below are weather info on coming days</h3>
-    <table>
-        <thead>
-            <td>Date </td>   
-            <td>Temperature </td>
-            <td>ForeCast </td>    
-            <td>min-temperature </td>
-            <td>max-temperature</td>
-        </thead>
-        <tr *ngFor='let dayData of daysInfo'>
-            <td>{{ dayData.dt+"000" | date: 'mediumDate' }} </td>   
-            <td>{{dayData.temp}} </td>
-            <td>{{ dayData.forecast}} </td>    
-            <td>{{dayData.minTemp }} </td>
-            <td>{{dayData.maxTemp }} </td>
-        </tr>
-    </table>    
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  style="height: 100px;overflow-y: scroll;width: 100%;">
+        <ng-container matColumnDef="dt">
+          <th mat-header-cell *matHeaderCellDef>Date </th>
+          <td mat-cell *matCellDef="let dayData"> {{ dayData.dt+"000" | date: 'mediumDate' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="temperature">
+          <th mat-header-cell *matHeaderCellDef> Temperature </th>
+          <td mat-cell *matCellDef="let dayData">{{ dayData.temp }} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="forecast">
+          <th mat-header-cell *matHeaderCellDef> ForeCast </th>
+          <td mat-cell *matCellDef="let dayData">{{ dayData.forecast}} </td>
+        </ng-container>
+ 
+        <ng-container matColumnDef="minTemp">
+          <th mat-header-cell *matHeaderCellDef> Min-temperature  </th>
+          <td mat-cell *matCellDef="let dayData">{{dayData.minTemp }} </td>
+        </ng-container>
+        <ng-container matColumnDef="maxTemp">
+            <th mat-header-cell *matHeaderCellDef> Max-temperature  </th>
+            <td mat-cell *matCellDef="let dayData">{{dayData.maxTemp }} </td>
+          </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
 </div>
 
 

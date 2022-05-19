@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import {WeatherService} from '../services/weather-service.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class DetailComponent implements OnInit {
   daysInfo: any[] = [];
   city: any;
   constructor(public weatherService:WeatherService) { }
-
+  public dataSource!: MatTableDataSource<any>;
+  displayedColumns: string[] = ['dt', 'temperature', 'forecast', 'minTemp','maxTemp'];
   ngOnInit(): void { 
     
   }
@@ -29,12 +31,14 @@ export class DetailComponent implements OnInit {
           "forecast":ele.weather[0].main,
           "dt":ele.dt,
           "date": ele['dt_txt'].split(" ")[0],
-          "temp": ele.main.temp,
-          "minTemp": ele.main.temp_min,
-          "maxTemp": ele.main.temp_max,
+          "temp": this.weatherService.convertTemp(ele.main.temp),
+          "minTemp": this.weatherService.convertTemp(ele.main.temp_min),
+          "maxTemp": this.weatherService.convertTemp(ele.main.temp_max),
           })
         }
       })
+      this.dataSource = new MatTableDataSource<any>(this.daysInfo);
     }    
   }
+  
 }
